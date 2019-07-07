@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+class node
+{
+    public:
+    node* prev;
+    int data;
+    node* next;
+};
+node* start=NULL;
+void create(int n)
+{
+    node* new_node;
+    node* ptr;
+    new_node= new node();
+    new_node->data=n;
+    new_node->next=NULL;
+    if(start==NULL)
+        start=new_node;
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+            ptr=ptr->next;
+        new_node->prev=ptr;
+        ptr->next=new_node;
+    }
+}
+void display()
+{
+    node* ptr=start;
+    while(ptr->next!=NULL)
+    {
+        cout<<ptr->data<<"->";
+        ptr=ptr->next;
+    }
+    cout<<ptr->data;
+}
+int main() {
+	int a,n;
+	cin>>n;
+	while(n--)
+	{
+	    cin>>a;
+	    create(a);
+	}
+	display();
+	return 0;
+}
