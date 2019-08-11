@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node * next;
+};
+struct node * start=NULL;
+void create(int n)
+{
+    struct node *new_node,*ptr;
+    new_node=new node();
+    new_node->data=n;
+    new_node->next=NULL;
+    if(start==NULL)
+        start=new_node;
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+            ptr=ptr->next;
+        ptr->next=new_node;
+    }
+}
+void display()
+{
+    struct node *ptr=start;
+    while(ptr->next!=NULL)
+    {
+        cout<<ptr->data<<"->";
+        ptr=ptr->next;
+    }
+    cout<<ptr->data;
+}
+void search(int x)
+{
+    int count=0;
+    while(start->data!=x&& start->next!=NULL)
+    {
+        start=start->next;
+        count++;
+    }
+    if(start->data==x)
+            cout<<"\nElement is found at position "<<count;
+    else
+            cout<<"\nElement not found";
+}
+int main()
+{
+    int a,n,x;
+    cin>>n;
+    while(n--)
+    {
+        cin>>a;
+        create(a);
+    }
+    display();
+    cin>>x;
+    search(x);
+	return 0;
+}

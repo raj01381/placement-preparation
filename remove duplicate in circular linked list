@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int a)
+{
+    struct node *new_node,*ptr;
+    new_node=new node;
+    new_node->data=a;
+    if(start==NULL)
+    {
+        start=new_node;
+        new_node->next=start;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=start)
+            ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=start;
+    }
+}
+void display()
+{
+    struct node *ptr=start;
+    while(ptr->next!=start)
+        {
+            cout<<ptr->data<<"->";
+            ptr=ptr->next;
+        }
+        cout<<ptr->data;
+}
+void dup()
+{
+    struct node *ptr1=start,*ptr2,*pptr=start;
+    while(ptr1->next!=start)
+    {
+        ptr2=ptr1->next;
+        while(ptr2!=start)
+        {
+            if(ptr1->data==ptr2->data)
+            {
+                pptr->next=ptr2->next;
+                free(ptr2);
+                
+            }
+            pptr=ptr2;
+            ptr2=ptr2->next;
+        }
+        pptr=ptr1;
+        ptr1=ptr1->next;
+    }
+        
+}
+int main() 
+{
+	int a,n;
+	cin>>n;
+	while(n--)
+	{
+	    cin>>a;
+	    create(a);
+	}
+	display();
+	dup();
+	cout<<endl;
+	display();
+	return 0;
+}
