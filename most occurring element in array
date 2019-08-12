@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+// complexity level of this program is O(N) and space required is O(1)
+int maxrepeating(int arr[10], int n, int k);
+
+int main()
+{
+  int arr[10],n,k;
+  cin>>n;
+  for(int i=0;i<n;i++)
+    cin>>arr[i];
+   k = sizeof (arr)/sizeof (arr[0]);
+   cout<<"Most repeating element in the given array is "<<maxrepeating(arr, n, k)<<endl;
+   return 0;
+}
+
+int maxrepeating(int* arr, int n, int k)
+{
+  for(int i=0; i<n; i++)
+    arr[arr[i]%k] += k;
+  
+  int max=arr[0], result=0;
+  for(int i= 1; i<n; i++)
+    {
+      if(arr[i]>max)
+      {
+      max=arr[i];
+      result = i;
+      }
+    }
+    return result;
+}
